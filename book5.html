@@ -1,0 +1,102 @@
+<html>
+
+<head>
+
+    <style type="text/css">
+    .error {
+        background-color: red;
+    }
+    .warning {
+        background-color: yellow;
+    }
+    .selected {
+        background-color: green;
+    }
+    </style>
+    <script type="text/javascript">
+    var myController = function($scope)
+    {
+        $scope.students = [
+        {
+            name: "madhur",
+            id: "1"
+        },
+        {
+            name: "tarun",
+            id: "2"
+        },
+        {
+            name: "nikhil",
+            id: "3"
+        }];
+
+        $scope.students.show = true;
+
+        console.log($scope.students);
+
+        $scope.toggle = function()
+        {
+
+            $scope.students.show = !$scope.students.show;
+
+        };
+
+        $scope.insertTom = function()
+        {
+            $scope.students.splice(1, 0,
+            {
+                name: 'Tom Thumb',
+                id: '4'
+            });
+        };
+
+
+        $scope.isError = false;
+        $scope.isWarning = false;
+        $scope.showError = function()
+        {
+            $scope.messageText = 'This is an error!';
+            $scope.isError = true;
+            $scope.isWarning = false;
+        };
+        $scope.showWarning = function()
+        {
+            $scope.messageText = 'Just a warning. Please carry on.';
+            $scope.isWarning = true;
+            $scope.isError = false;
+        };
+
+        $scope.selectItem = function(index)
+        {
+            $scope.selectedRow = index;
+        }
+
+    }
+    </script>
+</head>
+
+<body ng-app>
+
+
+    <div ng-controller="myController">
+        <button ng-click="toggle()">Toggle Visiblity</button>
+
+        <ul ng-show="students.show">
+            <li ng-repeat="item in students" ng-class='{selected: $index==selectedRow}' ng-click="selectItem($index)"><a href="/students/student/{{item.id}}">{{item.name}} </a> 
+            </li>
+        </ul>
+        <button ng-click="insertTom()">Insert</button>
+
+
+        <div ng-class='{error: isError, warning: isWarning}'>{{messageText}}</div>
+
+        <button ng-click='showError()'>Simulate Error</button>
+        <button ng-click='showWarning()'>Simulate Warning</button>
+
+    </div>
+
+
+    <script src="angular.js" type="text/javascript"></script>
+</body>
+
+</html>

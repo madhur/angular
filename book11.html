@@ -1,0 +1,43 @@
+<html  ng-app="myModule">
+<head>
+<script src="angular.js"></script>
+
+<script type="text/javascript">
+
+var myModule=angular.module('myModule', []);
+var myController=function($scope)
+{
+
+	$scope.message='';
+
+	$scope.addUser=function()
+	{
+		$scope.message='Thanks, ' + $scope.user.first + ', we added you!';
+	};
+
+}
+
+myModule.controller('myController', myController);
+
+</script>
+</head>
+	<body>
+		<h1>Sign up</h1>
+
+		<div ng-controller="myController">
+
+			<form name='addUserForm'>
+				<div ng-show='message'>{{message}}</div>
+				<div>First Name: <input ng-model="user.first" required></div>
+				<div>Last Name: <input ng-model="user.last" required></div>
+				<div>Email: <input type="email" ng-model="user.email" required></div>
+				<div>Age: <input type="number" ng-model="user.age" ng-maxlength='3' ng-minlength='1' min="1" max="100"></div>
+				<div><button ng-click='addUser()' ng-disabled='!addUserForm.$valid'>Submit</button></div>
+
+			</ng-form>
+		</div>
+
+	</body>
+
+
+</html>

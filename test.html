@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function displayTime() {
+    var elem = document.getElementById("clock");
+    var now = new Date();
+    if(elem == null) alert("NO clock element");
+    elem.innerHTML = now.toLocaleString();
+    setTimeout(displayTime, 1000);
+}
+window.onload = displayTime();
+
+</script>
+</head>
+<body>
+<h1>Digital Clock</h1>
+<span id="clock"></span>
+</body>
+</html>

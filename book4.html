@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<script type="text/javascript">
+
+function myController($scope)
+{
+
+	$scope.data={startingestimate: "10"};
+
+	//$scope.data.fundingneeded=0;
+	$scope.data.fundingneeded=$scope.data.startingestimate*10;
+
+	console.log($scope.data);
+
+	$scope.computeneeded=function()
+	{
+		$scope.data.fundingneeded=$scope.data.startingestimate*10;
+
+	};
+
+	$scope.reset=function()
+	{
+
+		$scope.data.startingestimate=10;
+	};
+
+	$scope.$watch('data.startingestimate', $scope.computeneeded);
+}
+</script>
+</head>
+
+<body ng-app>
+
+<div ng-controller="myController">
+
+<!-- Use ng-change on onclick to reflect changes to fundingneeded-->
+<input ng-model="data.startingestimate" ng-change="computeneeded()" />
+
+<button ng-click="reset()">Reset </button>
+
+<span>Starting estimate is: {{data.startingestimate}} </span>
+
+<span>Funding needed: {{data.fundingneeded}}</span>
+
+
+
+</div>
+
+
+<script src="angular.js" type="text/javascript" ></script>
+</body>
+
+</html>

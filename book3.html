@@ -1,0 +1,59 @@
+<html>
+<head>
+	<script src="angular.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+var mymodule=angular.module('myApp', []);
+
+var myController = function ($scope)
+{
+
+	$scope.greeting={message:"Welcome to Angular"};
+
+	$scope.items=[
+		{item: "Book", Price: "2.0", Quantity: "10"},
+		{item: "Table", Price: "5.0", Quantity: "20"},
+		{item: "Cabinet", Price: "10.0", Quantity: "1"}
+	];
+
+	$scope.remove = function(index)
+	{
+		$scope.items.splice(index, 1);
+	};
+};
+
+mymodule.controller('myController', myController);
+
+</script>
+
+
+</head>
+
+<body ng-app="myApp">
+
+<div ng-controller="myController">
+
+	<input ng-model="greeting.message" > {{greeting.message}} </input>
+	<br/>
+		{{greeting.message}}
+
+	<div ng-repeat="item in items">
+			<span>Item: {{item.item}}</span> <br/>
+			<span>Price: {{item.Price | currency}}</span> <br/>
+			<span>Quantity: {{item.Quantity}}</span>
+			<input ng-model="item.Price"  />
+			<br/>
+			<span>Cost:  {{item.Price * item.Quantity | currency}}  </span>
+
+			<input type="button" value="Remove" ng-click="remove($index)"></input>
+				<p/>
+
+
+	</div>
+
+</div>
+
+
+</body>
+
+</html>

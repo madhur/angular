@@ -1,0 +1,54 @@
+<html>
+
+<head>
+<script src="angular.js"></script></script>
+<script type="text/javascript">
+
+var shoppingModule=angular.module('ShoppingModule', []);
+
+shoppingModule.factory('Items', function() 
+{
+	var items={};
+	items.query=function()
+	{
+		return [
+			{title: 'Paint pots', description: 'Pots full of paint', price: 3.95},
+			{title: 'Polka dots', description: 'Dots with polka', price: 2.95},
+			{title: 'Pebbles', description: 'Just little rocks', price: 6.95}
+
+		]
+	};
+
+	return items;
+
+
+});
+
+
+
+var shoppingController = function($scope, Items)
+{
+	$scope.items=Items.query();
+
+}
+
+shoppingModule.controller("ShoppingController", shoppingController);
+
+
+</script>
+</head>
+
+<body>
+
+<h1>
+	<div ng-app="ShoppingModule" ng-controller="ShoppingController">
+
+<ul>
+		<li ng-repeat="item in items">
+			{{item.title}} | {{item.description}} | {{item.price}}
+         </li>
+
+</ul>
+	</div>
+
+</body>
